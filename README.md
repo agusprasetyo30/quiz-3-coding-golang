@@ -27,7 +27,6 @@
 | Parameters    |  Description  |
 | ------------- |:--------------|
 
-#### Example
 ```json
    {
       "id": 1,
