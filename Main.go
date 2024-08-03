@@ -1,11 +1,15 @@
 package main
 
 import (
+	"crypto/sha256"
 	"database/sql"
+	"encoding/base64"
 	"fmt"
 	"os"
+	"quiz-3/controllers"
 	"quiz-3/database"
 
+	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
@@ -41,8 +45,33 @@ func main() {
 	}
 
 	fmt.Println("Successfully connected!")
-
 	database.DBMigrate(DB)
 
+	// userRepository := repository.NewUserRepository(DB)
+	// authService := services.NewAuthService(userRepository)
+	// authController := controllers.NewAuthController(authService)
+
+	router := gin.Default()
+	router.POST("/login", controllers.Login)
+
+	router.Run(":8080")
+	// password := helper.HashPassword("admin")
+	// fmt.Println("ini password : admin")
+	// fmt.Println(password)
+	// loginCoba := helper.VerifyPassword("admin", password)
+	// fmt.Println("coba authentifikasi : ")
+	// fmt.Println("Hasil : ", loginCoba)
 	// router := gin.Default()
+}
+
+func HashPassword(password string) string {
+	h := sha256.New()
+	h.Write([]byte(password))
+	return base64.StdEncoding.EncodeToString(h.Sum(nil))
+}
+
+func VerifyPassword(password, hashedPassword string) bool {
+	h := sha256.New()
+	h.Write([]byte(password))
+	return hashedPassword == base64.StdEncoding.EncodeToString(h.Sum(nil))
 }
