@@ -10,17 +10,22 @@ import (
 )
 
 type AuthController struct {
-	authService services.AuthService
+	// authService services.AuthService
+	authRepository repository.UserRepository
 }
 
-func NewAuthController(authService services.AuthService) *AuthController {
-	return &AuthController{authService: authService}
+// func NewAuthController(authService services.AuthService) *AuthController {
+func NewAuthController(ar repository.UserRepository) *AuthController {
+	// return &AuthController{authService: authService}
+	return &AuthController{authRepository: ar}
 }
 
 func Login(ctx *gin.Context) {
+	// ac := controllers.NewAuthController(repository.NewUserRepository(database.DbConnection))
+
 	userRepository := repository.NewUserRepository(database.DbConnection)
 	authService := services.NewAuthService(userRepository)
-	authController := NewAuthController(authService)
+	// authController := NewAuthController(authService.)
 
 	username, password, ok := ctx.Request.BasicAuth()
 	if !ok {
@@ -28,12 +33,15 @@ func Login(ctx *gin.Context) {
 		return
 	}
 
-	user, err := authController.authService.Authenticate(username, password)
+	// user, err := authController.authService.Authenticate(username, password)
+	user, err := authService.Authenticate(username, password)
 
 	if err != nil {
-		ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid credentials"})
+		ctx.JSON(http.StatusUnauthorized, gin.H{"error": "Missing credentials"})
 		return
 	}
 	// Login successful, return user data or token
-	ctx.JSON(http.StatusOK, user)
+	ctx.JSON(http.StatusOK, gin.H{
+		"user": user,
+	})
 }

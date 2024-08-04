@@ -8,6 +8,7 @@ import (
 	"os"
 	"quiz-3/controllers"
 	"quiz-3/database"
+	"quiz-3/middleware"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -52,16 +53,13 @@ func main() {
 	// authController := controllers.NewAuthController(authService)
 
 	router := gin.Default()
+	router.Use(middleware.AuthMiddleware())
 	router.POST("/login", controllers.Login)
 
+	// Category
+
+	fmt.Println(router)
 	router.Run(":8080")
-	// password := helper.HashPassword("admin")
-	// fmt.Println("ini password : admin")
-	// fmt.Println(password)
-	// loginCoba := helper.VerifyPassword("admin", password)
-	// fmt.Println("coba authentifikasi : ")
-	// fmt.Println("Hasil : ", loginCoba)
-	// router := gin.Default()
 }
 
 func HashPassword(password string) string {

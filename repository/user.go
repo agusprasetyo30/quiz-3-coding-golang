@@ -2,7 +2,6 @@ package repository
 
 import (
 	"database/sql"
-	"fmt"
 	"quiz-3/model"
 )
 
@@ -28,7 +27,7 @@ func (r *userRepository) GetUserByUsernameAndPassword(username string, password 
 		&user.CreatedBy,
 		&user.ModifiedAt,
 		&user.ModifiedBy)
-	fmt.Println("Cek get user:", err)
+	// fmt.Println("Cek get user:", err)
 	// err := r.db.QueryRow(sql, username, password).Scan(&user.ID, &user.Username, &user.Password)
 	if err != nil {
 		return nil, err
