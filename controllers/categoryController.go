@@ -147,25 +147,9 @@ func DeleteCategory(c *gin.Context) {
 }
 
 func GeBookByCategory(c *gin.Context) {
-	var (
-		result gin.H
-		// book     model.Book
-		// category model.Category
-	)
+	var result gin.H
 
 	id, _ := strconv.Atoi(c.Param("id"))
-
-	// errBook := c.BindJSON(&book)
-	// if errBook != nil {
-	// 	panic(errBook)
-	// }
-
-	// errCategory := c.BindJSON(&category)
-	// if errCategory != nil {
-	// 	panic(errCategory)
-	// }
-
-	// category.ID = id
 
 	book1, err := repository.GetBookByCategory(database.DbConnection, id)
 

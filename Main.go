@@ -46,10 +46,6 @@ func main() {
 	fmt.Println("Successfully connected!")
 	database.DBMigrate(DB)
 
-	// userRepository := repository.NewUserRepository(DB)
-	// authService := services.NewAuthService(userRepository)
-	// authController := controllers.NewAuthController(authService)
-
 	router := gin.Default()
 	router.Use(middleware.AuthMiddleware())
 	router.POST("/login", controllers.Login)
@@ -61,6 +57,13 @@ func main() {
 	router.GET("/categories/:id", controllers.GetCategory)
 	router.PUT("/categories/:id", controllers.UpdateCategory)
 	router.DELETE("/categories/:id", controllers.DeleteCategory)
+
+	// Book
+	router.GET("/books", controllers.GetAllBook)
+	router.POST("/books", controllers.InsertBook)
+	router.GET("/books/:id", controllers.GetBook)
+	router.PUT("/books/:id", controllers.UpdateBook)
+	router.DELETE("/books/:id", controllers.DeleteBook)
 
 	fmt.Println(router)
 	router.Run(":8080")

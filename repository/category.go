@@ -95,6 +95,7 @@ func GetBookByCategory(db *sql.DB, id int) (result []model.Book, err error) {
 
 		err = rows.Scan(&book.ID, &book.CategoryID, &book.Category.ID, &book.Category.Name, &book.Category.Name, &book.Category.CreatedBy, &book.Category.CreatedAt, &book.Category.ModifiedBy,
 			&book.Description, &book.ImageURL, &book.ReleaseYear, &book.Price, &book.TotalPage, &book.Thickness, &book.CreatedAt, &book.CreatedBy, &book.ModifiedAt, &book.ModifiedBy)
+
 		if err != nil {
 			return
 		}

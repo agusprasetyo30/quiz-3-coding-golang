@@ -6,8 +6,8 @@ type Book struct {
 	ID          int        `json:"id" gorm:"primary_key"`
 	CategoryID  int        `json:"category_id" gorm:"column:category_id"`
 	Category    Category   `json:"category" gorm:"foreignKey:CategoryID"`
-	Description *string    `json:"description"`
-	ImageURL    *string    `json:"image_url"`
+	Description string     `json:"description"`
+	ImageURL    string     `json:"image_url"`
 	ReleaseYear int        `json:"release_year"`
 	Price       int        `json:"price"`
 	TotalPage   int        `json:"total_page"`
