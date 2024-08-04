@@ -1,9 +1,7 @@
 package main
 
 import (
-	"crypto/sha256"
 	"database/sql"
-	"encoding/base64"
 	"fmt"
 	"os"
 	"quiz-3/controllers"
@@ -57,19 +55,13 @@ func main() {
 	router.POST("/login", controllers.Login)
 
 	// Category
+	router.GET("/categories", controllers.GetAllCategory)
+	router.GET("/categories/:id/books", controllers.GeBookByCategory)
+	router.POST("/categories", controllers.InsertCategory)
+	router.GET("/categories/:id", controllers.GetCategory)
+	router.PUT("/categories/:id", controllers.UpdateCategory)
+	router.DELETE("/categories/:id", controllers.DeleteCategory)
 
 	fmt.Println(router)
 	router.Run(":8080")
-}
-
-func HashPassword(password string) string {
-	h := sha256.New()
-	h.Write([]byte(password))
-	return base64.StdEncoding.EncodeToString(h.Sum(nil))
-}
-
-func VerifyPassword(password, hashedPassword string) bool {
-	h := sha256.New()
-	h.Write([]byte(password))
-	return hashedPassword == base64.StdEncoding.EncodeToString(h.Sum(nil))
 }

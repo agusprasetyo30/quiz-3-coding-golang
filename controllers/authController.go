@@ -21,11 +21,8 @@ func NewAuthController(ar repository.UserRepository) *AuthController {
 }
 
 func Login(ctx *gin.Context) {
-	// ac := controllers.NewAuthController(repository.NewUserRepository(database.DbConnection))
-
 	userRepository := repository.NewUserRepository(database.DbConnection)
 	authService := services.NewAuthService(userRepository)
-	// authController := NewAuthController(authService.)
 
 	username, password, ok := ctx.Request.BasicAuth()
 	if !ok {
