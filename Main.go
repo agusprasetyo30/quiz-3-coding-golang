@@ -48,22 +48,22 @@ func main() {
 
 	router := gin.Default()
 	router.Use(middleware.AuthMiddleware())
-	router.POST("/login", controllers.Login)
+	router.POST("/api/login", controllers.Login)
 
 	// Category
-	router.GET("/categories", controllers.GetAllCategory)
-	router.GET("/categories/:id/books", controllers.GeBookByCategory)
-	router.POST("/categories", controllers.InsertCategory)
-	router.GET("/categories/:id", controllers.GetCategory)
-	router.PUT("/categories/:id", controllers.UpdateCategory)
-	router.DELETE("/categories/:id", controllers.DeleteCategory)
+	router.GET("/api/categories", controllers.GetAllCategory)
+	router.GET("/api/categories/:id/books", controllers.GeBookByCategory)
+	router.POST("/api/categories", controllers.InsertCategory)
+	router.GET("/api/categories/:id", controllers.GetCategory)
+	router.PUT("/api/categories/:id", controllers.UpdateCategory)
+	router.DELETE("/api/categories/:id", controllers.DeleteCategory)
 
 	// Book
-	router.GET("/books", controllers.GetAllBook)
-	router.POST("/books", controllers.InsertBook)
-	router.GET("/books/:id", controllers.GetBook)
-	router.PUT("/books/:id", controllers.UpdateBook)
-	router.DELETE("/books/:id", controllers.DeleteBook)
+	router.GET("/api/books", controllers.GetAllBook)
+	router.POST("/api/books", controllers.InsertBook)
+	router.GET("/api/books/:id", controllers.GetBook)
+	router.PUT("/api/books/:id", controllers.UpdateBook)
+	router.DELETE("/api/books/:id", controllers.DeleteBook)
 
 	fmt.Println(router)
 	router.Run(":8080")
