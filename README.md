@@ -5,13 +5,25 @@
 </div>
 
 ## List Package / Library
-- `config` :
-- `controllers` :
-- `database` :
-- `middleware` :
-- `model` :
-- `repository` :
-- `services` :
+- `config` : Digunakan untuk menampung data environtment / `.env` yang digunakan untuk menghubungkan project ke database
+- `controllers` : Digunakan untuk mengontrol dan menangani permintaan yang diberikan oleh user, contoh : mengontrol untuk permintaan authentifikasi, permintaan menambahkan, mengedit dan menghapus data dan lain-lain
+- `database` : Digunakan untuk menambah tabel migration
+- `middleware` : Digunakan untuk penjembatan data dan sebagai pengamanan sesuai dengan mekanisme yang di tentukan
+- `model` : Digunakan untuk menampung data kolom sesuai dengan tabel yang dibuat
+- `repository` : Digunakan untuk jembatan antara `model` dan `controller`
+- `services` : Digunakan untuk menyediakan layanan / service untuk mendukung fitur yang dibuat, untuk case sekarang digunakan sebagai layanan otentifikasi pengguna
+
+## Dummy Authentifikasi
+Untuk dapat menjalankan dummy project, dapat menggunakan user dummy sebagai berikut : <br>
+```
+Admin
+username : admin
+password : admin
+
+User 1
+username : user1
+password: user1
+```
 
 ## Endpoint API
 ### Login
